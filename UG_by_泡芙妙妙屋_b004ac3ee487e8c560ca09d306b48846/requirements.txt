@@ -1,0 +1,16 @@
+# Live2D Cubism SDK
+live2d-py>=0.5.0
+
+# OpenGL 渲染
+PyOpenGL>=3.1.0
+PyOpenGL_accelerate>=3.1.0
+glfw>=2.5.0
+
+# GUI 和窗口
+pygame>=2.5.0
+
+# LLM 支持
+requests>=2.28.0
+
+# 可选依赖
+pillow>=9.0.0
