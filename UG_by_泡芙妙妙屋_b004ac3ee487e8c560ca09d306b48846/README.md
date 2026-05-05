@@ -38,10 +38,10 @@ python main.py
 
 ## 配置
 
-在 `config.py` 中配置：
+配置环境变量：
 
 ```python
-API_KEY = "your-api-key-here"  # 设置你的 API Key
+XIAOU_API_KEY=your-api-key-here
 ```
 
 ## 开发

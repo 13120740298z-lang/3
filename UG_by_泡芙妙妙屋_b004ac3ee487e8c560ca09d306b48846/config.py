@@ -3,8 +3,10 @@
 存放 API Key、模型路径等配置项
 """
 
+import os
+
 # ==================== LLM API 配置 ====================
-API_KEY = "tp-cdu1419qbc2gztk8f6xokczevpf5eepyhxw1ld65pnx3305g"
+API_KEY = os.getenv("XIAOU_API_KEY", "")
 API_ENDPOINT = "https://token-plan-cn.xiaomimimo.com/v1"  # OpenAI 兼容接口
 API_ENDPOINT_ANTHROPIC = "https://token-plan-cn.xiaomimimo.com/anthropic"  # Anthropic 接口（备用）
 MODEL_NAME = "gpt-4o-mini"  # 或根据实际可用模型调整
