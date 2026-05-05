@@ -1,0 +1,36 @@
+name: build-windows-exe
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      PROJECT_DIR: UG_by_泡芙妙妙屋_b004ac3ee487e8c560ca09d306b48846
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: ${{ env.PROJECT_DIR }}/requirements.txt
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - run: pip install pyinstaller
+      - run: pyinstaller --noconfirm --clean --onedir --windowed --name xiaoU --icon resources/icon.ico --add-data "models;models" --add-data "resources;resources" --add-data "data;data" main.py
+      - run: Compress-Archive -Path "dist\\xiaoU" -DestinationPath "${{ github.workspace }}\\xiaoU-windows-x64.zip"
+        shell: pwsh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xiaoU-windows-x64
+          path: xiaoU-windows-x64.zip

@@ -43,6 +43,15 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def _app_dir() -> Path:
+    meipass = getattr(sys, "_MEIPASS", None)
+    if meipass:
+        return Path(meipass)
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parent
+
+
 # ==================== Windows 透明窗口设置 ====================
 try:
     user32 = ctypes.windll.user32
@@ -277,7 +286,7 @@ class DesktopPet:
         self._setup_window()
 
         # 加载资源路径
-        script_dir = Path(__file__).parent.resolve()
+        script_dir = _app_dir()
         model_dir = str(script_dir / 'models' / 'UG')
 
         # 初始化 Live2D 渲染器
